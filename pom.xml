@@ -22,12 +22,12 @@
 
     <modules>
         <module>common</module>
-        <module>servlet</module>
         <module>imageio</module>
+        <module>bom</module>
+        <!--  <module>servlet</module> -->
         <!--<module>swing</module>-->
         <!--<module>sandbox</module>-->
-        <module>contrib</module>
-        <module>bom</module>
+        <!--  <module>contrib</module> -->        
     </modules>
 
     <developers>

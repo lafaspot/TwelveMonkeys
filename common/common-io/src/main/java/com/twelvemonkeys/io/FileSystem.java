@@ -31,6 +31,7 @@ package com.twelvemonkeys.io;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
@@ -48,8 +49,17 @@ abstract class FileSystem {
     abstract String getName();
 
     static BufferedReader exec(String[] pArgs) throws IOException {
-        Process cmd = Runtime.getRuntime().exec(pArgs);
-        return new BufferedReader(new InputStreamReader(cmd.getInputStream()));
+    	//Process cmd = Runtime.getRuntime().exec(pArgs);
+    	//return new BufferedReader(new InputStreamReader(cmd.getInputStream()));
+    	
+    	return new BufferedReader(new InputStreamReader( new InputStream() {
+			@Override
+			public int read() throws IOException {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+		}));
+    	//return null;
     }
 
     static FileSystem get() {
