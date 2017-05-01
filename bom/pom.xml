@@ -46,12 +46,14 @@
                 <artifactId>imageio-metadata</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
+            <!--  
             <dependency>
                 <groupId>com.twelvemonkeys.imageio</groupId>
                 <artifactId>imageio-clippath</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+			-->
             <!-- ImageIO plugins -->
             <dependency>
                 <groupId>com.twelvemonkeys.imageio</groupId>
@@ -60,24 +62,35 @@
             </dependency>
             <dependency>
                 <groupId>com.twelvemonkeys.imageio</groupId>
-                <artifactId>imageio-hdr</artifactId>
+                <artifactId>imageio-jpeg</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.twelvemonkeys.imageio</groupId>
+                <artifactId>imageio-tiff</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- Commenting this for this version. -->
+            <!--  
             <dependency>
                 <groupId>com.twelvemonkeys.imageio</groupId>
                 <artifactId>imageio-icns</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.twelvemonkeys.imageio</groupId>
+                <artifactId>imageio-hdr</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
             <dependency>
                 <groupId>com.twelvemonkeys.imageio</groupId>
                 <artifactId>imageio-iff</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.twelvemonkeys.imageio</groupId>
-                <artifactId>imageio-jpeg</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+            
             <dependency>
                 <groupId>com.twelvemonkeys.imageio</groupId>
                 <artifactId>imageio-pcx</artifactId>
@@ -88,6 +101,8 @@
                 <artifactId>imageio-pdf</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
+            
             <dependency>
                 <groupId>com.twelvemonkeys.imageio</groupId>
                 <artifactId>imageio-pict</artifactId>
@@ -118,25 +133,26 @@
                 <artifactId>imageio-thumbsdb</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.twelvemonkeys.imageio</groupId>
-                <artifactId>imageio-tiff</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+            -->
 
             <!-- ImageIO 3rd party dependent plugins -->
+            <!--  
             <dependency>
                 <groupId>com.twelvemonkeys.imageio</groupId>
                 <artifactId>imageio-batik</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            -->
 
             <!-- Servlet -->
+            <!-- Not needed and has lots of thread related code. -->
+            <!--  
             <dependency>
                 <groupId>com.twelvemonkeys.servlet</groupId>
                 <artifactId>servlet</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            -->
         </dependencies>
     </dependencyManagement>
 </project>
