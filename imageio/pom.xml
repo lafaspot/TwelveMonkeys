@@ -27,14 +27,17 @@
         <module>imageio-core</module>
         <module>imageio-metadata</module>
         <!--<module>imageio-stream</module>-->
-        <module>imageio-clippath</module>
 
         <!-- Stand-alone readers/writers -->
         <module>imageio-bmp</module>
+        <module>imageio-jpeg</module>
+        <module>imageio-tiff</module>
+        
+        <!--  
+        <module>imageio-clippath</module>
         <module>imageio-hdr</module>
         <module>imageio-icns</module>
         <module>imageio-iff</module>
-        <module>imageio-jpeg</module>
         <module>imageio-pcx</module>
         <module>imageio-pdf</module>
         <module>imageio-pict</module>
@@ -43,13 +46,12 @@
         <module>imageio-sgi</module>
         <module>imageio-tga</module>
         <module>imageio-thumbsdb</module>
-        <module>imageio-tiff</module>
+		-->        
 
         <!-- Wrappers for 3rd party libs  -->
-        <module>imageio-batik</module>
-
+        <!-- <module>imageio-batik</module> -->
         <!-- Test cases for the JRE provided ImageIO plugins -->
-        <module>imageio-reference</module>
+        <!-- <module>imageio-reference</module> -->
     </modules>
 
     <properties>
