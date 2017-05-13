@@ -60,6 +60,17 @@
             </dependency>
             <dependency>
                 <groupId>com.github.lafa.twelvemonkeyspurejava.imageio</groupId>
+                <artifactId>imageio-tiff</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.lafa.twelvemonkeyspurejava.imageio</groupId>
+                <artifactId>imageio-jpeg</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--  
+            <dependency>
+                <groupId>com.github.lafa.twelvemonkeyspurejava.imageio</groupId>
                 <artifactId>imageio-hdr</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -71,11 +82,6 @@
             <dependency>
                 <groupId>com.github.lafa.twelvemonkeyspurejava.imageio</groupId>
                 <artifactId>imageio-iff</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.lafa.twelvemonkeyspurejava.imageio</groupId>
-                <artifactId>imageio-jpeg</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -118,12 +124,8 @@
                 <artifactId>imageio-thumbsdb</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.github.lafa.twelvemonkeyspurejava.imageio</groupId>
-                <artifactId>imageio-tiff</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
+            
+			-->
             <!-- ImageIO 3rd party dependent plugins -->
             <dependency>
                 <groupId>com.github.lafa.twelvemonkeyspurejava.imageio</groupId>
