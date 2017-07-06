@@ -60,7 +60,7 @@ public class BufferedImageFactoryTestCase {
 
     // This is a little random, and it would be nicer if we could throw an IllegalArgumentException on create.
     // Unfortunately, the API doesn't allow this...
-    @Test(timeout = 1000, expected = ImageConversionException.class)
+    @Test(timeout = 2000, expected = ImageConversionException.class)
     public void testGetBufferedImageErrorSourceURL() {
         Image source = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/META-INF/MANIFEST.MF"));
 
