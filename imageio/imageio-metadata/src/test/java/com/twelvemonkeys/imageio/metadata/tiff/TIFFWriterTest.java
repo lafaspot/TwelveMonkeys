@@ -190,12 +190,7 @@ public class TIFFWriterTest extends MetadataWriterAbstractTest {
 
     @Test
     public void testNesting() throws IOException {
-        TIFFEntry artist = new TIFFEntry(TIFF.TAG_SOFTWARE, TIFF.TYPE_ASCII, "TwelveMonkeys ImageIO");
-
-        TIFFEntry subSubSubSubIFD = new TIFFEntry(TIFF.TAG_SUB_IFD, TIFF.TYPE_LONG, new IFD(Collections.singletonList(artist)));
-        TIFFEntry subSubSubIFD = new TIFFEntry(TIFF.TAG_SUB_IFD, TIFF.TYPE_LONG, new IFD(Collections.singletonList(subSubSubSubIFD)));
-        TIFFEntry subSubIFD = new TIFFEntry(TIFF.TAG_SUB_IFD, TIFF.TYPE_LONG, new IFD(Collections.singletonList(subSubSubIFD)));
-        TIFFEntry subIFD = new TIFFEntry(TIFF.TAG_SUB_IFD, TIFF.TYPE_LONG, new IFD(Collections.singletonList(subSubIFD)));
+        TIFFEntry subIFD = new TIFFEntry(TIFF.TAG_SUB_IFD, TIFF.TYPE_LONG);
 
         Directory directory = new IFD(Collections.<Entry>singletonList(subIFD));
 
@@ -211,7 +206,9 @@ public class TIFFWriterTest extends MetadataWriterAbstractTest {
 
         assertNotNull(read);
         assertEquals(1, read.size());
-        assertEquals(subIFD, read.getEntryById(TIFF.TAG_SUB_IFD)); // Recursively tests content!
+        assertEquals(subIFD.getIdentifier(), read.getEntryById(TIFF.TAG_SUB_IFD).getIdentifier());
+        assertEquals(subIFD.getTypeName(), read.getEntryById(TIFF.TAG_SUB_IFD).getTypeName());
+		assertEquals(subIFD.getValueAsString(), read.getEntryById(TIFF.TAG_SUB_IFD).getValueAsString());
     }
 
     @Test
