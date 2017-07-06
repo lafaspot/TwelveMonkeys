@@ -57,6 +57,8 @@ import static com.twelvemonkeys.imageio.metadata.tiff.TIFFEntry.getValueLength;
 public final class TIFFReader extends MetadataReader {
 
     final static boolean DEBUG = "true".equalsIgnoreCase(System.getProperty("com.twelvemonkeys.imageio.metadata.exif.debug"));
+    
+    final static int MAX_NUM_ENTRY = 30;
 
     static final Collection<Integer> KNOWN_IFDS = Collections.unmodifiableCollection(Arrays.asList(TIFF.TAG_EXIF_IFD, TIFF.TAG_GPS_IFD, TIFF.TAG_INTEROP_IFD, TIFF.TAG_SUB_IFD));
 
@@ -95,7 +97,6 @@ public final class TIFFReader extends MetadataReader {
         List<Entry> entries = new ArrayList<>();
 
         pInput.seek(pOffset);
-        long nextOffset = -1;
 
         int entryCount;
         try {
@@ -104,6 +105,11 @@ public final class TIFFReader extends MetadataReader {
         catch (EOFException e) {
             // Treat EOF here as empty Sub-IFD
             entryCount = 0;
+        }
+        
+        // Limit the number of entry in one directory to 30 max
+        if (entryCount > MAX_NUM_ENTRY) {
+        	entryCount = MAX_NUM_ENTRY;
         }
 
         for (int i = 0; i < entryCount; i++) {
@@ -119,108 +125,9 @@ public final class TIFFReader extends MetadataReader {
             }
         }
 
-        if (readLinked) {
-            if (nextOffset == -1) {
-                try {
-                    nextOffset = pInput.readUnsignedInt();
-                }
-                catch (EOFException e) {
-                    // catch EOF here as missing EOF marker
-                    nextOffset = 0;
-                }
-            }
-
-            // Read linked IFDs
-            if (nextOffset != 0) {
-                CompoundDirectory next = (CompoundDirectory) readDirectory(pInput, nextOffset, true);
-
-                for (int i = 0; i < next.directoryCount(); i++) {
-                    ifds.add((IFD) next.getDirectory(i));
-                }
-            }
-        }
-
-        // TODO: Consider leaving to client code what sub-IFDs to parse (but always parse TAG_SUB_IFD).
-        readSubdirectories(pInput, entries,
-                Arrays.asList(TIFF.TAG_EXIF_IFD, TIFF.TAG_GPS_IFD, TIFF.TAG_INTEROP_IFD, TIFF.TAG_SUB_IFD)
-        );
-
         ifds.add(0, new IFD(entries));
 
         return new TIFFDirectory(ifds);
-    }
-
-    // TODO: Might be better to leave this for client code, as it's tempting go really overboard and support any possible embedded format..
-    private void readSubdirectories(ImageInputStream input, List<Entry> entries, List<Integer> subIFDIds) throws IOException {
-        if (subIFDIds == null || subIFDIds.isEmpty()) {
-            return;
-        }
-
-        for (int i = 0, entriesSize = entries.size(); i < entriesSize; i++) {
-            TIFFEntry entry = (TIFFEntry) entries.get(i);
-            int tagId = (Integer) entry.getIdentifier();
-
-            if (subIFDIds.contains(tagId)) {
-                try {
-                    if (KNOWN_IFDS.contains(tagId)) {
-                        long[] pointerOffsets = getPointerOffsets(entry);
-                        List<IFD> subIFDs = new ArrayList<>(pointerOffsets.length);
-
-                        for (long pointerOffset : pointerOffsets) {
-                            CompoundDirectory subDirectory = (CompoundDirectory) readDirectory(input, pointerOffset, false);
-
-                            for (int j = 0; j < subDirectory.directoryCount(); j++) {
-                                subIFDs.add((IFD) subDirectory.getDirectory(j));
-                            }
-                        }
-
-                        if (subIFDs.size() == 1) {
-                            // Replace the entry with parsed data
-                            entries.set(i, new TIFFEntry(tagId, entry.getType(), subIFDs.get(0)));
-                        }
-                        else {
-                            // Replace the entry with parsed data
-                            entries.set(i, new TIFFEntry(tagId, entry.getType(), subIFDs.toArray(new IFD[subIFDs.size()])));
-                        }
-                    }
-                }
-                catch (IIOException e) {
-                    if (DEBUG) {
-                        // TODO: Issue warning without crashing...?
-                        System.err.println("Error parsing sub-IFD: " + tagId);
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-    }
-
-    private long[] getPointerOffsets(final Entry entry) throws IIOException {
-        long[] offsets;
-        Object value = entry.getValue();
-
-        if (value instanceof Byte) {
-            offsets = new long[] {(Byte) value & 0xff};
-        }
-        else if (value instanceof Short) {
-            offsets = new long[] {(Short) value & 0xffff};
-        }
-        else if (value instanceof Integer) {
-            offsets = new long[] {(Integer) value & 0xffffffffL};
-        }
-        else if (value instanceof Long) {
-            offsets = new long[] {(Long) value};
-        }
-        else if (value instanceof long[]) {
-            offsets = (long[]) value;
-        }
-        else {
-            throw new IIOException(String.format("Unknown pointer type: %s", (value != null
-                                                                              ? value.getClass()
-                                                                              : null)));
-        }
-
-        return offsets;
     }
 
     private TIFFEntry readEntry(final ImageInputStream pInput) throws IOException {

@@ -373,7 +373,7 @@ public class TIFFImageWriterTest extends ImageWriterAbstractTestCase {
             ImageReader reader = ImageIO.getImageReaders(input).next();
             reader.setInput(input);
 
-            assertEquals("wrong image count", images.length, reader.getNumImages(true));
+            assertEquals("wrong image count", 1, reader.getNumImages(true));
 
             for (int i = 0; i < reader.getNumImages(true); i++) {
                 BufferedImage image = reader.read(i);
