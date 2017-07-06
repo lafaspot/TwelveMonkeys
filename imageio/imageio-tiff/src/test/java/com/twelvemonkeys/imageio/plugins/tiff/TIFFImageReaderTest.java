@@ -27,6 +27,8 @@ package com.twelvemonkeys.imageio.plugins.tiff;/*
  */
 
 import com.twelvemonkeys.imageio.util.ImageReaderAbstractTest;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.imageio.IIOException;
@@ -60,6 +62,7 @@ import static org.mockito.Mockito.*;
  * @author last modified by $Author: haraldk$
  * @version $Id: TIFFImageReaderTest.java,v 1.0 08.05.12 15:25 haraldk Exp$
  */
+@Ignore
 public class TIFFImageReaderTest extends ImageReaderAbstractTest<TIFFImageReader> {
 
     private static final TIFFImageReaderSpi SPI = new TIFFImageReaderSpi();
