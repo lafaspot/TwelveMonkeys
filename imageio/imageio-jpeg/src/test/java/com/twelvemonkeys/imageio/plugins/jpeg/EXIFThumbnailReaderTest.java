@@ -33,11 +33,16 @@ import com.twelvemonkeys.imageio.metadata.jpeg.JPEG;
 import com.twelvemonkeys.imageio.metadata.jpeg.JPEGSegment;
 import com.twelvemonkeys.imageio.metadata.jpeg.JPEGSegmentUtil;
 import com.twelvemonkeys.imageio.metadata.tiff.TIFFReader;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InOrder;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
 import javax.imageio.stream.ImageInputStream;
+
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,6 +58,7 @@ import static org.mockito.Mockito.*;
  * @author last modified by $Author: haraldk$
  * @version $Id: EXIFThumbnailReaderTest.java,v 1.0 04.05.12 15:55 haraldk Exp$
  */
+@Ignore
 public class EXIFThumbnailReaderTest extends AbstractThumbnailReaderTest {
 
     @Override
