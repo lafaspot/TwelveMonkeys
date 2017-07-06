@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.github.lafa.twelvemonkeyspurejava</groupId>
         <artifactId>twelvemonkeys</artifactId>
-        <version>1.0</version>
+        <version>1.0.1</version>
     </parent>
     <groupId>com.github.lafa.twelvemonkeyspurejava.contrib</groupId>
     <artifactId>contrib</artifactId>

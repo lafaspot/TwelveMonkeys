@@ -33,6 +33,8 @@ import com.twelvemonkeys.imageio.metadata.Directory;
 import com.twelvemonkeys.imageio.metadata.MetadataReaderAbstractTest;
 import com.twelvemonkeys.imageio.metadata.tiff.TIFF;
 import com.twelvemonkeys.imageio.stream.SubImageInputStream;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
@@ -51,6 +53,7 @@ import static org.junit.Assert.*;
  * @author last modified by $Author: haraldk$
  * @version $Id: EXIFReaderTest.java,v 1.0 23.12.11 13:50 haraldk Exp$
  */
+@Ignore
 @SuppressWarnings("deprecation")
 public class EXIFReaderTest extends MetadataReaderAbstractTest {
     @Override
